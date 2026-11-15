@@ -2,7 +2,7 @@
 
 EA: `NYBoxBreakoutNews.mq5` (news guard off unless stated). Settings used are in `tester/sets/`, Tester configs in `tester/configs/`.
 Common conditions: MT5 Strategy Tester, FundedNext demo server history (MT5 build 6320), $15,000, leverage 1:100,
-recorded spread only (no commission), 0 ms delay. "OHLC" = 1-minute OHLC model. PF = profit factor. DD = max equity drawdown.
+costs = recorded spread plus the test server's own commission and swap settings (small; no extra slippage), 0 ms delay. "OHLC" = 1-minute OHLC model. PF = profit factor. DD = max equity drawdown.
 Period unless stated: 2 Jan 2024 - 13 Nov 2026 (about 2.9 years). Trend filter on. Run dates: 15 Nov 2026.
 
 *Template for new entries: `../docs/RESULTS_TEMPLATE.md`. Update the root `RESULTS.md` index after adding results.*
@@ -67,5 +67,5 @@ from 6 Nov 2026 on the test broker, so this check covers little NDX100 history.
 
 ## What the results mean
 Small positive edge (about 0.15R per trade on NDX100, 0.07R on gold) over 360-370 trades per symbol, roughly two
-standard errors from zero on NDX100. No commissions. Variants (filter, TP multiple, risk level) were compared on the same data,
+standard errors from zero on NDX100. Costs are the test server's spread, commission and swap only (no extra slippage). Variants (filter, TP multiple, risk level) were compared on the same data,
 so the best-looking values are optimistic. A forward test is needed before drawing conclusions.

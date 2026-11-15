@@ -11,6 +11,9 @@ A collection of MetaTrader 5 Expert Advisors, each with its source, its Strategy
 |---|---|---|---|---|---|
 | [NYBoxBreakout](NYBoxBreakout/) (`NYBoxBreakoutNews.mq5`) | Breakout of the 09:00-09:30 New York pre-market box, M15 EMA trend filter, 3R target, flat at 16:55 NY | XAUUSD, NDX100 | Backtested; live forward test being prepared | NDX100: +$2,851, PF 1.16, DD 9.1%, 370 trades; XAUUSD: +$1,483, PF 1.12, DD 10.1%, 361 trades | [README](NYBoxBreakout/README.md), [results](NYBoxBreakout/RESULTS.md) |
 | [NYORB](NYORB/) (`NYORB.mq5`) | Same engine, but with the 09:30-09:45 opening range as the box | XAUUSD, NDX100 | Backtested; not better than the pre-market box | NDX100: +$1,274, PF 1.10; XAUUSD: +$2,112, PF 1.16 | [README](NYORB/README.md), [results](NYORB/RESULTS.md) |
+| [AsiaLondonBreakout](AsiaLondonBreakout/) (`..._v6.mq5`, `..._v6_Risk.mq5`) | Asian range, London breakout on gold; the Risk copy adds risk-based lots and loss stops | XAUUSD | Backtested; weak edge | Risk copy, shorts on, 0.5% risk: +$845, PF 1.08, DD 11.3% | [README](AsiaLondonBreakout/README.md), [results](AsiaLondonBreakout/RESULTS.md) |
+| [LVC_EA](LVC_EA/) | Asian range / London breakout with breakout, retest and reversal setups | XAUUSD | Backtested; no robust edge | DST-aware, 0.5% risk: -$196, PF 0.98 | [README](LVC_EA/README.md), [results](LVC_EA/RESULTS.md) |
+| [NewORB_EA](NewORB_EA/) (`NewORB_EA_v6.mq5`) | 09:30-09:45 NY opening range, stop at the far side, no target | XAUUSD | Backtested; not usable as is | -$482, PF 0.98, DD 35.7% | [README](NewORB_EA/README.md), [results](NewORB_EA/RESULTS.md) |
 
 \*0.5% risk per trade, 3R, trend filter on, MT5 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000 start.
 Full table with every run: [RESULTS.md](RESULTS.md).
@@ -52,7 +55,7 @@ finished until its results are written down. Do this every time:
 4. **Update the index.** Add or refresh the EA's headline row in `RESULTS.md` (root) and in the EA table of this README.
    Keep the headline row comparable (same risk, period and model) so EAs can be compared; say clearly when they cannot.
 5. **Say what the result means and what it does not.** Include sample size (number of trades), the period
-   covered, and caveats (small sample, in-sample selection among variants, missing commissions, limited tick history).
+   covered, and caveats (small sample, in-sample selection among variants, costs not fully modelled such as slippage, limited tick history).
    Do not oversell: a small edge over a few hundred trades is not proof.
 6. **Keep the repo reproducible.** Save the `.set` and `.ini` files used (`tester/`), and record the exact EA file and commit.
    Change the EA file name or version when its behaviour changes, and note it in the results.

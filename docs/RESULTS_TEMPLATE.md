@@ -34,7 +34,7 @@
 
 **Cross-check (if the EA is tick-sensitive):** same window on real ticks vs 1-minute OHLC: <numbers>.
 **What this shows:** <one or two sentences>.
-**Caveats:** <sample size, in-sample selection, missing commissions, limited tick history, anything odd in the logs>.
+**Caveats:** <sample size, in-sample selection, costs not modelled (slippage), limited tick history, anything odd in the logs>.
 ```
 
 Keep failed and inconclusive runs. After adding results, update `RESULTS.md` (root) and the EA table in `README.md`.

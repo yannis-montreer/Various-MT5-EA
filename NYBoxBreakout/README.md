@@ -43,5 +43,5 @@ Tested on XAUUSD and NDX100 (M5 chart). Results: [RESULTS.md](RESULTS.md).
 
 ## Known limits
 - No account-level safety stop (daily loss / drawdown halt) yet.
-- Edge is small: about 0.15R per trade on NDX100 and 0.07R on gold over 2024-2026. Backtests have no commissions.
+- Edge is small: about 0.15R per trade on NDX100 and 0.07R on gold over 2024-2026. Backtests include the test server's spread, commission and swap, but no extra slippage.
 - Real NDX100 ticks on the test broker exist only from 6 Nov 2026, so long runs use the 1-minute model.
