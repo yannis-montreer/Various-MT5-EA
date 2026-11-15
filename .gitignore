@@ -1,0 +1,23 @@
+# compiled and generated
+*.ex5
+*.log
+*.tmp
+
+# data you can regenerate with scripts/NYNewsExport.mq5
+NYNews*.csv
+NYNews*.txt
+
+# supervisor output and local settings
+forwardtest/reports/
+.claude/settings.local.json
+
+# secrets and local config - never commit
+.env
+*.key
+*secret*
+claude_desktop_config.json
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
