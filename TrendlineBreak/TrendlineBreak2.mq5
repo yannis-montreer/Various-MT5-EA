@@ -34,7 +34,7 @@ input double InpStopBufATR    = 0.25;
 input double InpMaxStopATR    = 8.0;    // skip if the stop is farther than this
 input double InpTargetR       = 0.0;    // 0 = no target (exit on the trailing line only)
 input bool   InpTrailHardSL   = true;   // also move the hard stop to each new swing (never loosened)
-input int    InpTrailMode     = 1;      // 0 = line through the last two swings, 1 = line anchored at the stop swing, under all later swings
+input int    InpTrailMode     = 1;      // 0 = last two swings, 1 = anchored at the stop swing, 2 = "snail": ever steeper chained lines
 input int    InpTrailMinTouch = 2;      // trailing line becomes active once it has this many touches (stop swing included)
 input bool   InpUseLong       = true;
 input bool   InpUseShort      = true;
@@ -291,6 +291,30 @@ void ManagePosition(ulong pos)
          if(p2 < 0 || (tDir > 0 && sl < best) || (tDir < 0 && sl > best)) { best = sl; p2 = pts[q]; }
         }
      }
+   else if(InpTrailMode == 2)
+     {
+      // "snail": chain of ever steeper lines (lower hull of the swing lows for a long).
+      // From the stop swing take the flattest line; if swings formed after its touch point,
+      // start a steeper line from that point; the last segment is the active line.
+      int ai = 0;                                   // index in pts of the current anchor
+      p1 = pts[0]; p2 = -1;
+      while(true)
+        {
+         int bestq = -1; double best = 0;
+         double vA = tDir > 0 ? R[pts[ai]].low : R[pts[ai]].high;
+         for(int q = ai + 1; q < np; q++)
+           {
+            double vq = tDir > 0 ? R[pts[q]].low : R[pts[q]].high;
+            double sl = (vq - vA) / (pts[q] - pts[ai]);
+            if(bestq < 0 || (tDir > 0 && sl <= best) || (tDir < 0 && sl >= best)) { best = sl; bestq = q; }
+           }
+         if(bestq < 0) break;
+         p1 = pts[ai]; p2 = pts[bestq];
+         if(bestq >= np - 1) break;                 // no swing after the touch point: this is the active line
+         ai = bestq;                                // steeper line from the touch point
+        }
+      if(p2 < 0) return;
+     }
    else { p1 = pts[np - 2]; p2 = pts[np - 1]; }
 
    double v1 = tDir > 0 ? R[p1].low : R[p1].high, v2 = tDir > 0 ? R[p2].low : R[p2].high;
@@ -303,7 +327,7 @@ void ManagePosition(ulong pos)
       double vq = tDir > 0 ? R[pts[q]].low : R[pts[q]].high;
       if(MathAbs(vq - (v1 + slope * (pts[q] - p1))) <= tol) touches++;
      }
-   if(InpTrailMode == 0) touches = np;
+   if(InpTrailMode == 0 || InpTrailMode == 2) touches = MathMax(touches, 2);
    if(touches < InpTrailMinTouch) return;
 
    double lv = v1 + slope * (last - p1);

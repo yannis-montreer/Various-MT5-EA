@@ -32,8 +32,57 @@ $15,000, server commission and swap included, no extra slippage. Results are in-
 
 Runs of the first file made after adding inputs were discarded: the tester kept the old input list (see docs/TESTER_NOTES.md).
 
+## Touch tolerance (`InpTouchTolATR`; the owner says touches are approximate: price comes near the line and leaves)
+| Tolerance | Exit | Net profit | Trades | Win rate | PF | Max DD (equity) | Avg trade |
+|---|---|---|---|---|---|---|---|
+| 0.3 ATR | trailing line only | -$517 | 50 | 48% | 0.76 | 7.5% | -$10.34 |
+| 0.5 ATR | trailing line only | -$243 | 54 | 46% | 0.90 | 11.1% | -$4.50 |
+| 0.75 ATR | trailing line only | +$7,946 | 8 | 50% | 29.2 | **40.3%** | one long held through the gold rally: +$8,157 (about 54R) |
+| 1.0 ATR | trailing line only | +$7,814 | 10 | 50% | 19.8 | **40.4%** | same trade |
+| 0.3 ATR | trailing line + 3R | +$938 | 56 | 50% | 1.42 | 5.5% | +$16.75 |
+| 0.5 ATR | trailing line + 3R | +$1,329 | 64 | 48% | 1.48 | 4.9% | +$20.76 |
+| 0.75 ATR | trailing line + 3R | +$1,406 | 73 | 48% | 1.43 | 4.5% | +$19.26 |
+| 1.0 ATR | trailing line + 3R | +$1,865 | 79 | 48% | 1.51 | 4.4% | +$23.61 (about 0.16R) |
+
+With the trailing exit alone, the anchored line becomes very flat in a strong trend: one trade made about 54R but gave back about
+$15,000 of open profit before exiting (40% equity drawdown) and blocked all other trades. With the 3R cap, every tolerance from
+0.3 to 1.0 ATR is positive (PF 1.42-1.51), which is more stable than the target choice (2R 1.32, 3R 1.42, 4R 1.02 at 0.3 ATR).
+
+## "Snail" exit (`InpTrailMode=2`): chain of ever steeper lines
+From the stop swing, take the flattest line under the later swing points; when swings form after its touch point, start a steeper
+line from that point; the last segment (ending at the latest swing) is the active line, and an H4 close through it exits.
+This is the lower hull of the swing lows for a long (upper hull of the swing highs for a short).
+
+| Tolerance | Target | Net profit | Trades | Win rate | PF | Max DD (equity) | Avg trade | Largest win |
+|---|---|---|---|---|---|---|---|---|
+| 0.3 ATR | none | -$213 | 60 | 50% | 0.91 | 5.2% | -$3.56 | $286 |
+| 0.5 ATR | none | +$447 | 67 | 48% | 1.15 | 6.3% | +$6.67 | $1,128 (about 7.5R) |
+| **1.0 ATR** | **none** | **+$1,171** | 78 | 49% | **1.32** | 6.5% | +$15.01 (about 0.10R) | $814 (about 5.4R) |
+| 1.0 ATR | 3R | +$1,057 | 80 | 50% | 1.29 | 6.4% | +$13.22 | $454 |
+
+Sanity check: rerunning "trailing line + 3R, 1.0 ATR" (mode 1) after recompiling gave the same +$1,865.48 as before.
+
+The snail exit fixes the give-back of the flat anchored line (equity drawdown 6.5% instead of 40%) and, with loose touches, makes the
+owner's exit positive on its own (PF 1.32) without a target. Its largest wins are about 5-7R, still short of the 10-20R the owner reports.
+
+## Trend filter (`TrendlineBreak3.mq5`): bull snail only in an uptrend, bear only in a downtrend
+The owner picks the direction from the trend. Coded as: last daily close above the daily EMA -> only longs (breaks of falling
+lines), below -> only shorts. Same entry line choice (most touches), touch tolerance 1.0 ATR, snail exit, no target.
+Daily history also starts in Jan 2024, so the 200-day EMA is unreliable for the first months.
+
+| Trend filter | Net profit | Trades | Win rate | PF | Max DD (equity) | Avg trade | Longs / shorts |
+|---|---|---|---|---|---|---|---|
+| None (same as TrendlineBreak2 snail, 1.0 ATR: +$1,170.74, check passed) | +$1,171 | 78 | 49% | 1.32 | 6.5% | +$15.01 (about 0.10R) | 32 / 46 |
+| **Daily close vs EMA 50** | **+$1,195** | 40 | 60% | **1.77** | 5.4% | +$29.88 (about 0.20R) | 28 (19 won) / 12 (5 won) |
+| Daily close vs EMA 200 | +$567 | 26 | 62% | 1.61 | 4.4% | +$21.79 | 21 / 5 |
+
+The filter halves the number of trades for the same profit: the trades it removes were about break-even. Over 2024-2026 gold
+rose strongly, so the filter mostly keeps longs; part of the improvement may be "long gold in a bull market". Samples of 26-40
+trades are too small to conclude.
+
 ## Conclusion
-No 10-20R trades appear in the mechanical version: the largest win is about 3.4R. The owner's exit alone loses here. A capped target
+At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
+gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
 with the trailing line as an early exit is positive (best 3R: PF 1.42), but results swing from PF 1.42 at 3R to 1.02 at 4R on about
 55 trades, so this is fragile and in-sample. The gap with the owner's manual results most likely comes from discretion in drawing and
 redrawing lines, which these rules do not capture. Next step: compare the EA's drawn lines with the owner's lines in the visual tester.
