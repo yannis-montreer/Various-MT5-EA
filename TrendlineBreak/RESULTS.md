@@ -80,6 +80,25 @@ The filter halves the number of trades for the same profit: the trades it remove
 rose strongly, so the filter mostly keeps longs; part of the improvement may be "long gold in a bull market". Samples of 26-40
 trades are too small to conclude.
 
+## H1 timeframe (`TrendlineBreak3.mq5`, `InpTF=H1`)
+Same settings in bars as on H4 (3 touches, 6 bars between touches, first touch at least 90 bars before the break, 400-bar search,
+tolerance 1.0 ATR, snail exit, no target), so lines are about 4 days long instead of 3 weeks. Trend filter still on the daily chart.
+These settings were chosen on H4, so H1 is a check of them on a timeframe they were not tuned on. 1% risk of the current balance
+(compounding).
+
+| Variant | Period | Net profit | Trades | Win rate | PF | Max DD (equity) | Longs / shorts |
+|---|---|---|---|---|---|---|---|
+| No trend filter | 2024 - 13 Nov 2026 | +$7,005 | 381 | 42% | 1.32 | 11.2% | 180 / 201 |
+| **Daily EMA 50 filter** | 2024 - 13 Nov 2026 | **+$6,676** | 162 | 46% | **1.73** | 8.1% | 120 (57 won) / 42 (17 won) |
+| Daily EMA 50 filter | 2024 (from $15,000) | +$1,909 | 50 | 46% | 1.65 | 5.5% | 46 / 4 |
+| Daily EMA 50 filter | 2025 (from $15,000) | +$1,434 | 56 | 48% | 1.56 | 5.4% | 55 / 1 |
+| Daily EMA 50 filter | 2026 to 13 Nov (from $15,000) | +$2,253 | 56 | 43% | 1.87 | 7.6% | 19 (8 won) / 37 (16 won) |
+
+Model check (daily EMA 50 filter, 28 Aug - 13 Nov 2026): real ticks +$533.86, 1-minute OHLC +$534.08, 19 trades each.
+
+On H1 the strategy is positive every year, with about three times the trades of H4. In 2026 the filter switched mostly to shorts
+(gold fell in the autumn) and stayed profitable, so the result is not only "long gold in a bull market".
+
 ## Conclusion
 At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
 gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
