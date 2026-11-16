@@ -149,7 +149,8 @@ Checked against FundedNext's high-impact USD list (998 events, 2024-2026, server
 filter, 0.5% risk, 149 trades) opened 6 trades and closed 2 within 30 seconds of an event (for example an entry at 17:00:00 on the
 ISM release), and touched 10 trades within 5 minutes.
 
-The guard postpones the bar's decision (entry on a break, exit on the snail line) until the window is over; it does not skip the trade.
+The guard is an option (`InpUseNewsGuard`, off by default like in NYBoxBreakoutNews; turn it on for FundedNext funded accounts).
+It postpones the bar's decision (entry on a break, exit on the snail line) until the window is over; it does not skip the trade.
 Stops and targets already on the server can still fill inside a window. Tester: events from `NYNews_FN.csv` (Common\Files);
 live: MT5 calendar filtered by `NYNewsIds.txt`, reloaded every 6 hours.
 

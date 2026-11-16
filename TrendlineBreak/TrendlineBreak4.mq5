@@ -47,7 +47,7 @@ input double InpLots          = 0.10;
 input long   InpMagic         = 920553;
 input bool   InpDraw          = true;
 input group "News guard: no entry or line exit near high-impact news"
-input bool   InpUseNewsGuard  = true;
+input bool   InpUseNewsGuard  = false;  // enable news guard (off by default; FundedNext funded accounts: on)
 input int    InpNewsBeforeSec = 30;     // seconds before the event
 input int    InpNewsAfterSec  = 30;     // seconds after the event
 input string InpNewsCurrencies = "USD"; // currencies tied to the symbol, comma separated
