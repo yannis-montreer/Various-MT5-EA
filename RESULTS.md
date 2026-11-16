@@ -19,6 +19,8 @@ server (MT5 build 6320), $15,000 deposit, leverage 1:100, costs = recorded sprea
 | NYORB | NDX100 | 4R | +$1,523 | 334 | 45% | 1.12 | 9.2% | OHLC | |
 | NYORB | XAUUSD | 3R | +$2,112 | 355 | 43% | 1.16 | 11.8% | OHLC | Tie with the box on gold |
 | NYORB | XAUUSD | 4R | +$2,040 | 355 | 42% | 1.15 | 12.5% | OHLC | |
+| [NYOpenScalp](NYOpenScalp/RESULTS.md) | NDX100 | 1R | +$866 | 716 | 53% | 1.05 | 9.0% | OHLC | M1 scalp of 09:30-09:35 range, 15 min exit, no trend filter. 2R/30 min: +$1,624, PF 1.07. Real ticks match OHLC |
+| NYOpenScalp | XAUUSD | 1R | -$921 | 733 | 48% | 0.95 | 13.1% | OHLC | |
 
 Win rate = winning trades / trades, from the Tester report.
 
