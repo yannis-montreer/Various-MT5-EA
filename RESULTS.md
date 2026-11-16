@@ -53,6 +53,37 @@ Running the NY box on both symbols doubles the profit with no extra drawdown. Ad
 (4.2% to 6.3%), so it is less efficient. Caveats: in-sample, closed-trade drawdown ignores floating losses, simultaneous positions add risk,
 and the combination assumes each leg keeps its own sizing.
 
+## Head to head at 1% risk: TrendlineBreak gold H1 vs NYBoxBreakout NDX100 (2 Jan 2024 - 13 Nov 2026, 1-minute OHLC, $15,000)
+| Strategy | Net profit | Trades | Win rate | PF | Max DD (equity) | Recovery factor | Max losing streak |
+|---|---|---|---|---|---|---|---|
+| TrendlineBreak3, XAUUSD H1, daily EMA 50 filter, snail exit | +$6,676 | 162 | 46% | 1.73 | 8.1% | 3.90 | 8 |
+| NYBoxBreakoutNews, NDX100 M5, 3R, M15 trend filter, 1% risk | +$6,045 | 370 | 36% | 1.15 | 18.1% | 1.72 | 8 |
+
+Similar profit; the trendline strategy has less than half the drawdown. But it works on gold only (EURUSD, NDX100 and UKOUSD
+fail with the same settings), while the NY box is positive on both NDX100 and gold.
+
+## Portfolio: TrendlineBreak gold H1 + NYBoxBreakout NDX100, each at 0.5% risk
+Merged from the per-trade lists of both Tester reports (2 Jan 2024 - 13 Nov 2026, 1-minute OHLC, $15,000, closed-trade basis).
+At 0.5% risk the trendline EA skips some gold trades whose stop is too wide for the 0.01 minimum lot (149 trades instead of 162 at 1%).
+
+| Portfolio | Trades | Net profit | PF | Win rate | Closed-trade max DD | Net / DD | Worst losing streak |
+|---|---|---|---|---|---|---|---|
+| TrendlineBreak3 XAUUSD H1 alone | 149 | +$2,666 | 1.76 | 47% | $375 (2.2%) | 7.1 | 10 |
+| NYBoxBreakoutNews NDX100 alone | 370 | +$2,851 | 1.16 | 36% | $1,506 (8.8%) | 1.9 | 8 |
+| **Both** | 519 | **+$5,517** | 1.26 | 39% | **$1,649 (9.0%)** | **3.3** | 8 |
+
+| Year | Trendline gold | NY box NDX100 | Both |
+|---|---|---|---|
+| 2024 | +$885 | +$2,023 | +$2,909 |
+| 2025 | +$713 | -$684 | +$28 |
+| 2026 (to 13 Nov) | +$1,068 | +$1,512 | +$2,580 |
+
+Correlation of daily P&L -0.01, monthly -0.03. Losing months: 11 of 35 (trendline), 14 (NY box), 13 (both). At most 2 positions open
+at once (1% total risk); 63 of the 370 NY box trades opened while a trendline trade was open. Worst combined day -$204 (1.4%).
+Adding the trendline leg nearly doubles the profit for almost the same drawdown, and covered the NY box's losing 2025. Caveats:
+in-sample, closed-trade drawdown ignores floating losses of multi-day gold trades (the trendline EA alone had a 2.9% equity drawdown),
+and the trendline result depends on gold only.
+
 ## Correction (15 Nov 2026)
 Earlier versions of these docs said the tests had "no commissions". The Tester reports include the test server's commission and swap
 (for example gold, 351 trades: -$33.81 commission, -$80.64 swap; NDX100: no commission, -$58.57 swap). Results above already include them;
