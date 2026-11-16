@@ -112,6 +112,16 @@ EURUSD, same server, 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000, 1% 
 No edge on EURUSD: the only positive filtered run depends on one 12R trade, with a 17% drawdown. The rules work on gold but not
 on EURUSD, so the gold result may owe a lot to gold's strong 2024-2026 trends rather than to a general trendline edge.
 
+## UKOUSD (Brent), H1 (`TrendlineBreak3.mq5`, same settings)
+UKOUSD, same server, H1, 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000, 1% risk, tolerance 1.0 ATR, snail exit, no target.
+
+| Trend filter | Net profit | Trades | Win rate | PF | Max DD (equity) | Largest win |
+|---|---|---|---|---|---|---|
+| Daily EMA 50 | -$1,752 | 131 | 40% | 0.77 | 20.9% | $332 |
+| None | -$2,673 | 359 | 42% | 0.86 | 30.7% | $643 |
+
+Losing on Brent, with or without the filter. This matches the IDFX study, where oil (WTI) was also negative.
+
 ## Conclusion
 At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
 gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
