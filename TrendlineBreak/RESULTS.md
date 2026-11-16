@@ -122,6 +122,27 @@ UKOUSD, same server, H1, 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000,
 
 Losing on Brent, with or without the filter. This matches the IDFX study, where oil (WTI) was also negative.
 
+## NDX100, H1 (`TrendlineBreak3.mq5`, same settings)
+NDX100, same server, H1, 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000, 1% risk, tolerance 1.0 ATR, snail exit, no target.
+
+| Trend filter | Net profit | Trades | Win rate | PF | Max DD (equity) | Longs / shorts |
+|---|---|---|---|---|---|---|
+| Daily EMA 50 | +$113 | 121 | 41% | 1.02 | 17.1% | 92 (40 won) / 29 (10 won) |
+| None | -$2,481 | 366 | 40% | 0.88 | 26.9% | 155 / 211 |
+
+Break-even with the filter, losing without it. Unlike the IDFX study (NAS100 4H positive), these rules do not carry over to NDX100.
+
+## Summary across markets (H1, daily EMA 50 filter, same settings)
+| Market | Net profit | Trades | PF | Max DD (equity) |
+|---|---|---|---|---|
+| XAUUSD | +$6,676 | 162 | 1.73 | 8.1% |
+| EURUSD | +$917 | 157 | 1.09 | 17.4% (one 12R trade) |
+| NDX100 | +$113 | 121 | 1.02 | 17.1% |
+| UKOUSD | -$1,752 | 131 | 0.77 | 20.9% |
+
+Only gold works. Either gold respects trendlines better than other markets, or 2024-2026 was an unusually good period for gold
+trends; with three years of data it is not possible to tell which.
+
 ## Conclusion
 At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
 gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
