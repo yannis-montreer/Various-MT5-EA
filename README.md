@@ -14,6 +14,7 @@ A collection of MetaTrader 5 Expert Advisors, each with its source, its Strategy
 | [AsiaLondonBreakout](AsiaLondonBreakout/) (`..._v6.mq5`, `..._v6_Risk.mq5`) | Asian range, London breakout on gold; the Risk copy adds risk-based lots and loss stops | XAUUSD | Backtested; weak edge | Risk copy, shorts on, 0.5% risk: +$845, PF 1.08, DD 11.3% | [README](AsiaLondonBreakout/README.md), [results](AsiaLondonBreakout/RESULTS.md) |
 | [LVC_EA](LVC_EA/) | Asian range / London breakout with breakout, retest and reversal setups | XAUUSD | Backtested; no robust edge | DST-aware, 0.5% risk: -$196, PF 0.98 | [README](LVC_EA/README.md), [results](LVC_EA/RESULTS.md) |
 | [NewORB_EA](NewORB_EA/) (`NewORB_EA_v6.mq5`) | 09:30-09:45 NY opening range, stop at the far side, no target | XAUUSD | Backtested; not usable as is | -$482, PF 0.98, DD 35.7% | [README](NewORB_EA/README.md), [results](NewORB_EA/RESULTS.md) |
+| [ElasticFade](ElasticFade/) (`ElasticFade.mq5`) | Tick scalp: fade a $2 burst in 3 s after a 1 s stall, target 50% of the burst | XAUUSD | Backtested on real ticks only; no edge, even before spread | Real ticks 28 Aug - 13 Nov 2026, 0.10 lot: -$4,547, PF 0.20, 206 trades (not on the footnote basis) | [results](ElasticFade/RESULTS.md) |
 
 \*0.5% risk per trade, 3R, trend filter on, MT5 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000 start.
 Full table with every run: [RESULTS.md](RESULTS.md).

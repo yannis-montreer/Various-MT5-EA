@@ -29,6 +29,7 @@ Win rate = winning trades / trades, from the Tester report.
 | AsiaLondonBreakout v6 Risk | shorts on, **0.25% risk** | +$307 | 193 | 24% | 1.06 | 5.6% | Same EA at the risk that fits a 10% drawdown limit |
 | [LVC_EA (DST-aware)](LVC_EA/RESULTS.md) | default, 0.5% risk | -$196 | 160 | 29% | 0.98 | 8.9% | Original with fixed UTC offset: -$778. Options made it worse |
 | [NewORB_EA v6](NewORB_EA/RESULTS.md) | lot 0.10, no TP | -$482 | 737 | 70% | 0.98 | 35.7% | Real ticks -$1,039 on 28 Aug - 13 Nov vs OHLC -$492 |
+| [ElasticFade](ElasticFade/RESULTS.md) | tick scalp, 0.10 lot, replica rules | -$4,547 | 206 | 45% | 0.20 | 30.4% | **Real ticks, 28 Aug - 13 Nov 2026 only.** Loses even before spread; best variant (with SL) -$2,214 |
 
 ## Portfolio: combining strategies (each leg at 0.25% risk per trade, 2 Jan 2024 - 13 Nov 2026, OHLC)
 Built by merging the per-trade lists of the Strategy Tester reports (closed-trade balance basis, $15,000 start). Daily P&L correlations
