@@ -99,6 +99,19 @@ Model check (daily EMA 50 filter, 28 Aug - 13 Nov 2026): real ticks +$533.86, 1-
 On H1 the strategy is positive every year, with about three times the trades of H4. In 2026 the filter switched mostly to shorts
 (gold fell in the autumn) and stayed profitable, so the result is not only "long gold in a bull market".
 
+## EURUSD (`TrendlineBreak3.mq5`, same settings as on gold)
+EURUSD, same server, 1-minute OHLC model, 2 Jan 2024 - 13 Nov 2026, $15,000, 1% risk, tolerance 1.0 ATR, snail exit, no target.
+
+| Timeframe | Trend filter | Net profit | Trades | Win rate | PF | Max DD (equity) | Largest win |
+|---|---|---|---|---|---|---|---|
+| H1 | daily EMA 50 | +$917 | 157 | 36% | 1.09 | 17.4% | $1,905 (about 12R; more than the whole net profit) |
+| H1 | none | -$4,412 | 445 | 39% | 0.80 | 34.0% | $1,403 |
+| H4 | daily EMA 50 | -$283 | 54 | 39% | 0.88 | 7.9% | $224 |
+| H4 | none | +$230 | 94 | 45% | 1.05 | 12.4% | $467 |
+
+No edge on EURUSD: the only positive filtered run depends on one 12R trade, with a 17% drawdown. The rules work on gold but not
+on EURUSD, so the gold result may owe a lot to gold's strong 2024-2026 trends rather than to a general trendline edge.
+
 ## Conclusion
 At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
 gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
