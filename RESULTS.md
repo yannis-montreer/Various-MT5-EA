@@ -21,6 +21,7 @@ server (MT5 build 6320), $15,000 deposit, leverage 1:100, costs = recorded sprea
 | NYORB | XAUUSD | 4R | +$2,040 | 355 | 42% | 1.15 | 12.5% | OHLC | |
 | [NYOpenScalp](NYOpenScalp/RESULTS.md) | NDX100 | 1R | +$866 | 716 | 53% | 1.05 | 9.0% | OHLC | M1 scalp of 09:30-09:35 range, 15 min exit, no trend filter. 2R/30 min: +$1,624, PF 1.07. Real ticks match OHLC |
 | NYOpenScalp | XAUUSD | 1R | -$921 | 733 | 48% | 0.95 | 13.1% | OHLC | |
+| [NYSweep](NYSweep/RESULTS.md) | NDX100 | 0.17-0.5R | +$1,012 | 477 | 79% | 1.14 | 4.0% | OHLC | Prior-day high/low sweep fades, all four setups. Pre-NY sweeps only: +$1,081, PF 1.30, DD 2.0%, positive each year. Real ticks match OHLC |
 | [NYMeanRevert](NYMeanRevert/RESULTS.md) | NDX100 | to ref | -$3,730 | 704 | 38% | 0.86 | 30.3% | OHLC | Midday fade to tick-volume VWAP, 2 ATR entry. TWAP -$4,062, EMA100 -$1,419; every variant loses |
 
 Win rate = winning trades / trades, from the Tester report.
