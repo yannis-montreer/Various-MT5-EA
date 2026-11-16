@@ -143,6 +143,24 @@ Break-even with the filter, losing without it. Unlike the IDFX study (NAS100 4H 
 Only gold works. Either gold respects trendlines better than other markets, or 2024-2026 was an unusually good period for gold
 trends; with three years of data it is not possible to tell which.
 
+## News guard (`TrendlineBreak4.mq5`)
+On H1 the EA acts at the first tick of each bar, i.e. on the hour, when many US releases come out (10:00 NY = 17:00 server).
+Checked against FundedNext's high-impact USD list (998 events, 2024-2026, server time), the unguarded run (XAUUSD H1, daily EMA 50
+filter, 0.5% risk, 149 trades) opened 6 trades and closed 2 within 30 seconds of an event (for example an entry at 17:00:00 on the
+ISM release), and touched 10 trades within 5 minutes.
+
+The guard postpones the bar's decision (entry on a break, exit on the snail line) until the window is over; it does not skip the trade.
+Stops and targets already on the server can still fill inside a window. Tester: events from `NYNews_FN.csv` (Common\Files);
+live: MT5 calendar filtered by `NYNewsIds.txt`, reloaded every 6 hours.
+
+| Guard window | Net profit | Trades | PF | Max DD (equity) | Opens / closes within 30 s of news | within 5 min |
+|---|---|---|---|---|---|---|
+| None (TrendlineBreak3) | +$2,666 | 149 | 1.76 | 2.9% | 6 / 2 | 6 / 4 |
+| +/-30 s | +$2,680 | 149 | 1.76 | 2.9% | **0 / 0** | 6 / 4 |
+| +/-5 min | +$2,721 | 149 | 1.77 | 2.9% | 0 / 0 | **0 / 2** (two stop-losses filled by the market) |
+
+The guard costs nothing here: same trades, slightly better result.
+
 ## Conclusion
 At 0.3 ATR tolerance no 10-20R trades appear (largest win about 3.4R); with looser touches one 54R trade appears, but the exit
 gives back most of the open profit. The owner's exit alone is either losing or dominated by that one trade. A capped target
